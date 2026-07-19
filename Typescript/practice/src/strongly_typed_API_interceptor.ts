@@ -58,7 +58,6 @@ async function safeFetchInterceptor<T>(
     };
   }
 }
-
 interface UserProfile{
   id: string;
   name: string;
