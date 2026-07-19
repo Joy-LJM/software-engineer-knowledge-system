@@ -29,6 +29,7 @@
     //ypeScript looks at the function T, infers its return type, binds it to the placeholder R, and returns R
     type GetReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
     ```
+  
 - Distributive Conditional Types
     - When conditional types act on a generic type parameter that is a union, they distribute automatically.
     
@@ -37,7 +38,15 @@
       type Result = ToArray<string | number>; // Evaluates to string[] | number[]
       ```
     
+- Mapped types
 
+  
+- `Partial<T>`: make all props optional
+  - `Readonly<T>`: make all props readonly
+- `Pick<T, K>`: select a subset of keys
+  - `Omit<T, K>`: remove keys
+  - `Record<K, V>`: map keys to a value type
+  
 - Recursive Mapped Types
 
   - You can iterate over the keys of an object using mapped types. If you call the mapper type inside itself, it becomes recursive, allowing you to manipulate deeply nested structures.
@@ -45,10 +54,22 @@
   - Using the `as` keyword, you can filter, rename, or convert key names during the mapping process.
 
     ```
-    // 将对象的所有键名转换为大写
-    type UppercaseKeys<T> = {
-      [K in keyof T as Uppercase<string & K>]: T[K] // & symbol: type intersection, to constrain K as string type
-    };
+    // 将对象的所有键名转换为大写,rename
+    type UppercaseKeys<T> = T extends object
+      ? { [K in keyof T as Uppercase<string & K>]: UppercaseKeys<T[K]> } // & symbol: type intersection, to constrain K as string type
+      : T;
+    
+// filtering keys(dropping properties)
+    interface Circle{
+    	kind:'circle',
+    	radius: number
+    }
+    // filters out the 'kind' property
+    type RemoveKindField<Type>={
+    	[P in keyof Type as Exclude<P,'kind'>]: Type[P]
+    }
+    type KindlessCircle=RemoveKindField<Circle>
+    
     ```
-
+    
     
