@@ -13,6 +13,10 @@
     ```
 
 
+- `extends interface`: Limits generics to objects adhering to a specific shape.
+
+  `extends keyof`: Limits string/number literals to valid keys of an object.
+  
 - At the type level, `extends` behaves like an `if/else` statement. **Syntax:** `T extends U ? X : Y`
 
   ```
