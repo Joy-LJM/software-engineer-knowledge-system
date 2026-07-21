@@ -44,8 +44,8 @@
     
 - Mapped types
 
-  
 - `Partial<T>`: make all props optional
+  
   - `Readonly<T>`: make all props readonly
 - `Pick<T, K>`: select a subset of keys
   - `Omit<T, K>`: remove keys
@@ -62,18 +62,27 @@
     type UppercaseKeys<T> = T extends object
       ? { [K in keyof T as Uppercase<string & K>]: UppercaseKeys<T[K]> } // & symbol: type intersection, to constrain K as string type
       : T;
-    
-// filtering keys(dropping properties)
-    interface Circle{
-    	kind:'circle',
-    	radius: number
-    }
-    // filters out the 'kind' property
-    type RemoveKindField<Type>={
-    	[P in keyof Type as Exclude<P,'kind'>]: Type[P]
-    }
+      
+      	// filtering keys(dropping properties)
+        interface Circle{
+        	kind:'circle',
+        	radius: number
+        }
+        // filters out the 'kind' property
+        type RemoveKindField<Type>={
+    		[P in keyof Type as Exclude<P,'kind'>]: TypeP
+    	}
     type KindlessCircle=RemoveKindField<Circle>
     
     ```
-    
-    
+
+- Loop through items in tuple
+
+  ```
+   //PropertyKey Identical to (keyof any), extract an union of premitive type, type PropertyKey = string | number | symbol;
+  type TupleToObject<T extends readonly PropertyKey[]> = {
+    [K in T[number]]:K
+  }
+  ```
+
+  
