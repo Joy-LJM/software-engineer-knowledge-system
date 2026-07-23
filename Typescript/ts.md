@@ -41,6 +41,11 @@
     ```
     //typeScript looks at the function T, infers its return type, binds it to the placeholder R, and returns R
     type GetReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
+    
+    // using infer to extract the last element: _ and rest of the array elements: R and then return R
+    type Pop<T extends any[]> = T extends [...infer R, infer _] ? R : []
+    Pop<[3, 2, 1]> // [3,2]
+    
     ```
   
 - Distributive Conditional Types
