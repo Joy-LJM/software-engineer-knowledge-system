@@ -1,4 +1,13 @@
 ### Generics & Constraints
+
+#### Core Generics
+
+1. **Type variables**: Placeholders like `<T>` capture the type passed into a function, interface, or class so safety is maintained without using `any`.
+
+2. **Inference**: TypeScript looks at the values you pass at runtime and automatically figures out what `T` should be.
+
+3. **Multiple types**: You can use more than one type parameter (e.g., `<T, U>`) to relate inputs and outputs.
+
   - Generics allow you to define functions, interfaces, or classes without specifying specific types in advance. The types can be specified at runtime. The `extends` keyword can be used to add constraints to generics.
 
     ```typescript
@@ -13,9 +22,9 @@
     ```
 
 
-- `extends interface`: Limits generics to objects adhering to a specific shape.
+- `extends interface`:  Limits a generic type so it must contain specific properties or match a shape. For example, `<T extends { length: number }>` forces the input to have a `.length` property.
 
-  `extends keyof`: Limits string/number literals to valid keys of an object.
+  `extends keyof`: Ensures a second generic type is a valid property name of an object, like `<T, K extends keyof T>`
   
 - At the type level, `extends` behaves like an `if/else` statement. **Syntax:** `T extends U ? X : Y`
 
@@ -30,7 +39,7 @@
   - The `infer` keyword allows you to extract and declare a temporary type variable inside a conditional clause. It can *only* be used within the `extends` clause of a conditional type
 
     ```
-    //ypeScript looks at the function T, infers its return type, binds it to the placeholder R, and returns R
+    //typeScript looks at the function T, infers its return type, binds it to the placeholder R, and returns R
     type GetReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
     ```
   
@@ -44,13 +53,13 @@
     
 - Mapped types
 
-- `Partial<T>`: make all props optional
-  
-  - `Readonly<T>`: make all props readonly
-- `Pick<T, K>`: select a subset of keys
-  - `Omit<T, K>`: remove keys
-  - `Record<K, V>`: map keys to a value type
-  
+
+    - `Partial<T>`: make all props optional
+    - `Readonly<T>`: make all props readonly
+    - `Pick<T, K>`: select a subset of keys
+    - `Omit<T, K>`: remove keys
+    - `Record<K, V>`: map keys to a value type
+
 - Recursive Mapped Types
 
   - You can iterate over the keys of an object using mapped types. If you call the mapper type inside itself, it becomes recursive, allowing you to manipulate deeply nested structures.
