@@ -99,4 +99,4 @@
   }
   ```
 
-  
+- Awaited<T>: a built-in TypeScript utility type introduced in TypeScript 4.5 Release Notes that models how the await operator or .then() method recursively unwrap Promises. `type A = Awaited<Promise<string>>; `// type A is string
