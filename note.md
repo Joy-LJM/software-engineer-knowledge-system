@@ -21,4 +21,3 @@
   - Composite: GPU-assisted layer composition for final screen rendering.
   - Pixels on screen
 
-## Network and Docker
