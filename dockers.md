@@ -1,6 +1,7 @@
 ### Docker
 - docker and virtual machine
 - container vs image
+  
   - container: a running env for image
 - docker command
   - docker pull img:ver(pull image)
@@ -14,29 +15,36 @@
   - docker logs (log all)
   - docker ps -a(lists running and stopped containers)
   - docker logs containerId/containerName [-f](debug in a specific container; -f: keep logging)
-  - docker exec -it containerId/containerName /bin/sh(or /bin/bash)
+  - docker exec -it containerId/containerName /bin/sh(or /bin/bash; create a terminal for a container to run linux command)
     - ![alt text](image.png)
   - docker network create mongo_network(open the command line terminal of the container)
-  - docker rm containerName
-  - docker rmi imageName
+  - docker rm containerName(remove container)
+  - docker rmi imageName(remove image)
+  - docker run -v /host/path/directory:/container/directory/path(create volumes)
   
-- docker compose(takes care of creating a common network for multi images)
+- docker compose(takes care of creating a common network for multi images; should start after changing compose file)
   - command: docker-compose -f mongo.yaml up[down] -d
-  `
+  ```
     version:'4.0'
     services:
       mongodb:(container name)
         image:mongo
         ports:
           -27017:27017(hostPort:containerPort)
+        volumes:
+          <!-- - host-volume-name: path-inside-of-the-container -->
+          - mongo-data: /data/db
         environment:
           -envVariable=value
       mongo-express:
         image:mongo-express
-  `
+    volumes:
+      mongo-data:
+        driver:local
+  ```
 - Dockerfile- a blueprint for building images
   - command: docker build -t myApp:1.0 . (imageName:tag; using Dockerfile from current folder . to build)
-  `
+  ```
   <!-- start by basing our built image on another image -->
   FROM node:13-alpine
 
@@ -57,4 +65,20 @@
    <!--start the app from entry point: server.js; no need for /home/app/server.js because of WORKDIR -->
   CMD ["node", "server.js"]
 
-  `
+  ```
+- docker repository(one image one repo)
+  - pushing our built Docker image to a private registry on AWS
+    - AWS ECR
+      - install AWS CLI 
+      - authenticate docker client to AWS registry
+      - ![image-20260807224719591](D:\ziliao\learn\software-engineer-knowledge-system\dockers.assets\image-20260807224719591.png)
+- deploy Docker image to server
+- Docker Volume- data persistence 
+  - 3 types of volumes
+    - **Named Volume**
+    - anonymous Volume
+    - host volume
+  - different db path
+    - mysql:var/lib/mysql
+    - postgres: var/lib/postgresql/data
+    - mongodb: /data/db  

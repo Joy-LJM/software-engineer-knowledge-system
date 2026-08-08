@@ -20,4 +20,4 @@
   - Paint: Fills in pixels (text, colors, shadows, borders) into separate visual layers.
   - Composite: GPU-assisted layer composition for final screen rendering.
   - Pixels on screen
-
+-
