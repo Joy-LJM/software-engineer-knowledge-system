@@ -80,6 +80,7 @@
       - install AWS CLI 
       - authenticate docker client to AWS registry
       - ![image-20260807224719591](D:\ziliao\learn\software-engineer-knowledge-system\dockers.assets\image-20260807224719591.png)
+- create ubuntu vm(EC2) on AWS to install docker
 - deploy Docker image to server
 - Docker Volume- data persistence 
   - 3 types of volumes
