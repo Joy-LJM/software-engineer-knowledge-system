@@ -25,7 +25,7 @@
   - docker logs containerId/containerName [-f](debug in a specific container; -f: keep logging)
   - docker exec -it containerId/containerName /bin/sh(or /bin/bash; create a terminal for a container to run linux command)
     - ![alt text](image.png)
-  - docker network create mongo_network(open the command line terminal of the container)
+  - docker network create mongo_network(create shared network among multi images)
   - docker rm containerName(remove container)
   - docker rmi imageName(remove image)
   - docker run -v /host/path/directory:/container/directory/path(create volumes)
