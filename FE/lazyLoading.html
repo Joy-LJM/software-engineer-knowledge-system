@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .lazy{
+      width:100%;
+      display:block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <img src="image.jpg" alt="Description of image" data-src="https://placehold.co/600x400/orange/white" class="lazy">
+  <img src="image.jpg" alt="Description of image" data-src="https://placehold.co/600x400/000000/FFF" class="lazy">
+  <img src="image.jpg" alt="Description of image" data-src="https://placehold.co/600x400?text=Hello+World" class="lazy">
+  <img src="image.jpg" alt="Description of image" data-src="https://placehold.co/600x400?text=1" class="lazy">
+  <img src="image.jpg" alt="Description of image" data-src="https://placehold.co/600x400?text=2" class="lazy">
+  <script>
+    const lazyImages = document.querySelectorAll('.lazy');
+    const observer=new IntersectionObserver((entries, observer)=>{
+      entries.forEach((entry)=>{
+        if(entry.isIntersecting){
+          const img=entry.target;
+          img.src=img.dataset.src;
+          img.removeAttribute('data-src');
+          observer.unobserve(img);
+        }
+      })
+    }
+    // ,{
+    //   root:null,
+    //   threshold:0.1
+    // }
+  )
+    lazyImages.forEach(img=>{
+      observer.observe(img);
+    })
+  </script>
+</body>
+</html>

@@ -1,8 +1,16 @@
 ### Docker
 - docker and virtual machine
-- container vs image
-  
+- docker architecture
+  - docker client(cli)
+  - docker host(vm,physical server)
+  - docker daemon
+  - image(template used to build containers)
+  - container (instance of image)
+  - registries(store docker images;docker hub)
   - container: a running env for image
+- Namespaces and Cgroups
+  - Namespace: isolates resources(hard drive, networking, hostnames, users etc) for a particular process on a machine
+  - Control group: limit, prioritize, and isolate resource usage(CPU, Disk, memory, I/O and network bandwidth) of a group of processes
 - docker command
   - docker pull img:ver(pull image)
   - docker run [-d][-p 6000:6379][-e envVariable=value][--name renameContainer][--net networkName] img(pull images and start a container to run image;-d:detached mode; -p:port binding, 6000 host port, 6379 container application port)
@@ -11,7 +19,7 @@
   - docker start containerId(start container)
   - docker stop containerId(stop container)
   - docker ps(list running containers)
-  - docker exec -t
+  - docker exec -t my-container ls(-t: allocate a terminal to run interactive commands like bash within the container)
   - docker logs (log all)
   - docker ps -a(lists running and stopped containers)
   - docker logs containerId/containerName [-f](debug in a specific container; -f: keep logging)

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // give 2 arrays, create a function that let's a user know (true/false) whether these two arrays contain any common items
+      // for example, if array1 = ['a', 'b', 'c', 'x'] and array2 = ['z', 'y', 'i'], the function should return false. If array1 = ['a', 'b', 'c', 'x'] and array2 = ['z', 'y', 'x'], the function should return true.
+
+      // Ask for clarification: what do you mean by "contain any common items"? Do you mean that the two arrays should have at least one element in common, or do you mean that the two arrays should be identical?
+
+      // double check with interviewer: 2 parameters - arrays - no size limit; return true or false
+
+      // method1: nested for loop - O(n^2)-not efficient especially for large arrays
+      // Space Complexity: O(1) - no additional data structures used
+      // brute force(A simple and straight forward way): check each item in arr1 against each item in arr2
+      function containsCommonItem(arr1, arr2) {
+        for (let i = 0; i < arr1.length; i++) {
+          for (let j = 0; j < arr2.length; j++) {
+            if (arr1[i] === arr2[j]) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+      console.log(containsCommonItem(["a", "b", "c", "x"], ["z", "y", "i"])); // false
+      console.log(containsCommonItem(["a", "b", "c", "x"], ["z", "y", "x"])); // true
+
+      // method2: use hash map - O(a+b) - more efficient, better time complexity
+      // Space Complexity: O(a) -more heavy- where a is the length of arr1, since we are creating a map object to store the elements of arr1
+
+      // loop through arr1, create object where properties are items in arr1, then loop through arr2 and check if any item exists in that object
+      function containsCommonItem2(arr1, arr2) {
+        let map={};
+        for(let i=0;i<arr1.length;i++){
+          if(!map[arr1[i]]){
+            map[arr1[i]]=true;
+          }
+        }
+        for(let j=0; j<arr2.length;j++){
+          if(map[arr2[j]]){
+            return true;
+          }
+        }
+        return false;
+      }
+
+      // method3: use built-in methods -more readable
+      function containsCommonItem3(arr1, arr2) {
+        return arr1.some(item=>arr2.includes(item));
+      }
+    </script>
+  </body>
+</html>
