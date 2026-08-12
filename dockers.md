@@ -13,7 +13,7 @@
   - Control group: limit, prioritize, and isolate resource usage(CPU, Disk, memory, I/O and network bandwidth) of a group of processes
 - docker command
   - docker pull img:ver(pull image)
-  - docker run [-d][-p 6000:6379][-e envVariable=value][--name renameContainer][--net networkName] img(pull images and start a container to run image;-d:detached mode; -p:port binding, 6000 host port, 6379 container application port)
+  - docker run [-d][-p 6000:6379][-e envVariable=value][--name renameContainer][--net networkName] img(pull images and start a container to run image;-d:detached mode; -p:publish or map a container's port to the specified host port;port binding, 6000 host port, 6379 container application port)
   - docker run imgName:Tag(if not specifying tag, it's `latest` by default)
   - docker images(list local images)
   - docker start containerId(start container)
