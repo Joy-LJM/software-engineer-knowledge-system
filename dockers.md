@@ -25,11 +25,10 @@
   - docker logs containerId/containerName [-f](debug in a specific container; -f: keep logging)
   - docker exec -it containerId/containerName /bin/sh(or /bin/bash; create a terminal for a container to run linux command)
     - ![alt text](image.png)
-  - docker network create mongo_network(create shared network among multi images)
   - docker rm containerName(remove container)
   - docker rmi imageName(remove image)
   - docker run -v /host/path/directory:/container/directory/path(create volumes)
-  
+  - docker image inspect imageId(check meta data)
 - docker compose(takes care of creating a common network for multi images; should start after changing compose file)
   - command: docker-compose -f mongo.yaml up[down] -d
   ```
@@ -59,10 +58,10 @@
   <!--optionally define env variables  -->
   ENV MONGO_DB_USERNAME=admin \
       MONGO_DB_PWD=password
-<!-- execute any linux command, create folder -->
-  RUN mkdir -p /home/app
-<!-- copy current folder to -->
-  COPY ./app /home/app
+  <!-- execute any linux command, create folder -->
+    RUN mkdir -p /home/app
+  <!-- copy current folder to; COPY <src> <dest> -->
+    COPY ./app /home/app
 
    <!-- set default dir so that next commands executes in /home/app dir -->
   WORKDIR /home/app
@@ -72,6 +71,11 @@
 
    <!--start the app from entry point: server.js; no need for /home/app/server.js because of WORKDIR -->
   CMD ["node", "server.js"]
+
+  <!-- used to specify the starting command to be executed when the container is started; CMD can be the default parameters for ENTRYPOINT -->
+    ENTRYPOINT ["echo"]
+  <!-- expose port number 80 -->
+    EXPOSE 80
 
   ```
 - docker repository(one image one repo)
@@ -91,3 +95,37 @@
     - mysql:var/lib/mysql
     - postgres: var/lib/postgresql/data
     - mongodb: /data/db  
+- image tag
+  - a mutable label that can point to different images over time
+  - ex: python:3.11
+- docker image digest
+  - a unique, immutable hash that represents the exact image contents(all layers, metadata etc)
+  - ex:python@sha256:xxx
+  - benefits:
+    - guarantees that the base image will not change even if the :tag gets updated
+    - helps in security audits and build reproducibility
+    - prevents accidental breaking changes from upstream images
+- docker networking
+  - bridge
+    - a data link-layer physical or virtual device that forwards traffic between two or more network segments.
+    - in docker, a bridge network uses a software bridge to allow containers to communicate inside the docker host.
+  - bridge driver
+    - containers connected to the same bridge network can communicate
+    - a bridge network(default bridge is docker0) isolates its containers from other containers on other bridges
+    - bridge networks apply within the same docker host only
+    - a container can connect to multiple bridge networks at the same time
+  - bridge mode
+    - in bridge network mode, when a container communicates outbound with external networks, the Docker host(maintains NAT entries in IPtables) performs Network Address Translation(NAT)
+  - commands
+    - ip a(display network interfaces and their associated ip addresses on a Linux-based system)
+    - docker network ls(list all available networks)
+    - docker network create --subnet 10.0.0.0/16 <network-name>(create a network with a custom subnet range)
+    - docker network inspect <network-name or id>(inspect a docker network)
+    - docker network create mongo_network(create shared network among multi images)
+    - docker run --network <network-name> <container-name>
+    - docker network connect<network-name> <container-name>
+    - docker network disconnect<network-name> <container-name>
+  - container port
+    - static port binding: docker run -p 3001:80 nginx
+    - dynamic port binding : docker run -P nginx(map container ports to random host ports)
+    - check container port mappings: docker port <container-id>
