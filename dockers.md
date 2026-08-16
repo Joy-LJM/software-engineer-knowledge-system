@@ -106,6 +106,7 @@
     - helps in security audits and build reproducibility
     - prevents accidental breaking changes from upstream images
 - docker networking
+  - types: bridge, host(shares the host's network namespace), none(container is completely isolated)
   - bridge
     - a data link-layer physical or virtual device that forwards traffic between two or more network segments.
     - in docker, a bridge network uses a software bridge to allow containers to communicate inside the docker host.
@@ -122,10 +123,12 @@
     - docker network create --subnet 10.0.0.0/16 <network-name>(create a network with a custom subnet range)
     - docker network inspect <network-name or id>(inspect a docker network)
     - docker network create mongo_network(create shared network among multi images)
-    - docker run --network <network-name> <container-name>
-    - docker network connect<network-name> <container-name>
-    - docker network disconnect<network-name> <container-name>
+    - docker run --network <network-name, host> <container-name>
+    - docker network connect <network-name> <container-name>
+    - docker network disconnect <network-name> <container-name>
   - container port
     - static port binding: docker run -p 3001:80 nginx
     - dynamic port binding : docker run -P nginx(map container ports to random host ports)
     - check container port mappings: docker port <container-id>
+- data persistent
+  - type: volumes, bind mount
