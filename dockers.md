@@ -132,3 +132,15 @@
     - check container port mappings: docker port <container-id>
 - data persistent
   - type: volumes, bind mount
+  - docker volumes:
+    - benefits
+      - is isolated from container layers
+      - persists independently of containers
+      - is mounted into containers at runtime
+      - allows data to survive container restarts, deletion, and image rebuilds
+    - commands:
+      - docker volume create <name>
+      - docker volume ls
+      - docker volume inspect <name>
+      - docker volume rm <name>
+      - docker run -v [volume name]:[container directory] [image name]
