@@ -1,0 +1,3 @@
+FROM nginx
+CMD ["echo","hello i am dockerfile 2"]
+EXPOSE 80

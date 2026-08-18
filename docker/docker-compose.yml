@@ -1,0 +1,23 @@
+services:
+  app:
+    container_name: cont1
+    build:
+      context: /app/bin/project
+      dockerfile: docker2
+    ports:
+      - "5551:3000"
+    volumes:
+      - /usr/home/project:/data/app
+      - myvol:/data/logs
+   
+  db-service:
+    container_name: redis-db
+    image: redis:latest
+    ports:
+      - "7326:6379"
+    volumes:
+      - dbvol:/data
+      - /usr/logs:/var/log/redis
+volumes:
+  myvol:
+  dbvol:
