@@ -94,6 +94,7 @@
   ```
 - Dockerfile- a blueprint for building images
   - command: docker build -t myApp:1.0 . (imageName:tag; using Dockerfile from current folder . to build)
+  - multi-state builds(multiple FROM statements in a single Dockerfile) to build or compile the app
   ```
   <!-- start by basing our built image on another image -->
   FROM node:13-alpine
@@ -165,6 +166,7 @@
     - dynamic port binding : docker run -P nginx(map container ports to random host ports)
     - check container port mappings: docker port <container-id>
   - customize network settings and connect to external network in docker compose file
+  - when containers are on the same user-defined bridge network(by docker compose file or create manually), they can communicate by name,not only by ip address
 - data persistent
   - type: volumes, bind mount
   - docker volumes:
@@ -201,3 +203,11 @@
     - commands:
       - docker run -it --name cont -v /host/path/directory:/container/directory/path image bash(creates and starts a container, mounts a host directory into it, and gives me an interactive Bash shell inside the container.)
       - docker run -v $(pwd):/app my-dev-image(pwd: current workdir)
+- monolith application vs microservices
+  - monolith application builds as a single code project, hard to scale and troubleshoot
+  - microservices: application code processes are built as separate code projects
+- Docker Swarm
+  - what is it?
+    - an advanced Docker Engine feature for managing a cluster of Docker daemons
+    - turns multiple Docker hosts into a single virtual Docker engine called a Swarm
+- Kubernetes
