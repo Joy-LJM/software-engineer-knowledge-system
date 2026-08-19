@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">photographer</div>
+    <script>
+      document.addEventListener("dblclick", function () {
+        // Get the selected text
+        const selectedText = window.getSelection().toString().trim();
+        if (selectedText) {
+          // Proceed to fetch word details
+          console.log("Selected text:", selectedText);
+          // process the selected text, e.g., fetch word details from an API
+          const utterance = new SpeechSynthesisUtterance(selectedText);
+          utterance.lang = "en-US";
+          window.speechSynthesis.speak(utterance);
+        }
+      });
+    </script>
+  </body>
+</html>
