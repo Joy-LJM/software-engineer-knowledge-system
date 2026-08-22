@@ -1,5 +1,7 @@
 ### Docker
 - docker and virtual machine
+  - docker runs directly on the host machine's os via the docker engine,shares the host os kernel
+  - vm contains its own complete guest os, virtual hardware drivers
 - docker architecture
   - docker client(cli)
   - docker host(vm,physical server)
@@ -211,3 +213,29 @@
     - an advanced Docker Engine feature for managing a cluster of Docker daemons
     - turns multiple Docker hosts into a single virtual Docker engine called a Swarm
 - Kubernetes
+### Self-Check
+Interview Questions You Should Be Able to Answer
+By the end of Week 6, you should be confidently able to answer:
+**Linux**
+  - What is the difference between a process and a thread? 
+   - process: an active, running instance of a computer program
+   - Every process has at least one thread, known as the main thread.
+  - What happens when you execute a program? 
+    - click an app icon-->new a process by kernel-->system loads the code and data from the disk to RAM
+      - system calls: the program asks the os for hardware or file access when needed.
+
+**Networking**
+  • What is the difference between localhost, 127.0.0.1, and 0.0.0.0? 
+  • How does a browser communicate with a backend server? 
+  • What is a TCP connection? 
+  • What is a port? 
+**Docker**
+  • Why was Docker created? 
+  • What problem does it solve? 
+  • Image vs Container? 
+  • Docker vs Virtual Machine? 
+  • What is a Dockerfile? 
+  • What is Docker Compose? 
+  • What is a Volume? 
+  • Why use a multi-stage build? 
+  • How do containers communicate?
