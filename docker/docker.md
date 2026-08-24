@@ -219,23 +219,32 @@ By the end of Week 6, you should be confidently able to answer:
 **Linux**
   - What is the difference between a process and a thread? 
    - process: an active, running instance of a computer program
-   - Every process has at least one thread, known as the main thread.
+   - A thread is the smallest unit of execution within that process. Every process contains at least one thread, known as the main thread.
+   - threads share the process memory but have their own call stacks.
   - What happens when you execute a program? 
     - click an app icon-->new a process by kernel-->system loads the code and data from the disk to RAM
       - system calls: the program asks the os for hardware or file access when needed.
 
 **Networking**
   • What is the difference between localhost, 127.0.0.1, and 0.0.0.0? 
+  - "localhost" is a hostname that usually points to the loopback address 127.0.0.1. And 0.0.0.0 means "all interfaces" on the local machine.
+  - 127.0.0.1 is the loopback address that points to your own machine. Other devices cannot reach services bound only to that address. If a server binds to 0.0.0.0, it listens on all IPv4 interfaces, so other machines can connect, assuming firewalls allow it.
   • How does a browser communicate with a backend server? 
+  - After you enter a URL, the browser queries DNS to resolve the domain to an IP address. Then it establishes a TCP connection, usually with TLS for HTTPS, sends an HTTP request, then the server processes it and returns a response. And the browser renders the content.
   • What is a TCP connection? 
   • What is a port? 
+  - ports are numbers that help the OS direct traffic to the right application. An IP address identifies a machine or interface on the network. Together, they form a socket, like IP plus port.
 **Docker**
   • Why was Docker created? 
+  - Docker packages apps with their dependencies so they run consistently across environments, avoiding the "works on my machine" problem. Compared to virtual machines, containers share the host OS kernel, so they're generally lighter and start faster, though they isolate processes without bundling a full OS.
   • What problem does it solve? 
   • Image vs Container? 
+  - Docker image is an immutable blueprint, and a container is a running instance created from that image." When you run docker run, Docker creates a container from the image and starts it. Many containers can come from the same image.
   • Docker vs Virtual Machine? 
   • What is a Dockerfile? 
   • What is Docker Compose? 
+  - a Dockerfile is like a recipe for building one image. Docker Compose is a tool that uses a YAML file to define and run multi-container apps.
   • What is a Volume? 
+  - A docker volume keeps data outside the container's writable layer, so when containers are recreated, the data stays.
   • Why use a multi-stage build? 
   • How do containers communicate?
