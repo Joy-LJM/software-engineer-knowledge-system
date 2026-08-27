@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <input type="text"/>
+    <button>Submit</button>
+    <div id="display"></div>
+
+  </div>
+  <script>
+    const displayBox=document.getElementById('display');
+    const input=document.querySelector('input');
+    const button=document.querySelector('button');
+    button.addEventListener('click',function(){
+      displayBox.innerHTML=input.value;// XSS: display user input directly without sanitization
+      //displayBox.textContent=input.value;// safer alternative to prevent XSS
+    })
+  </script>
+</body>
+</html>

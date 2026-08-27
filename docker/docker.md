@@ -10,9 +10,10 @@
   - container (instance of image)
   - registries(store docker images;docker hub)
   - container: a running env for image
-- Namespaces and Cgroups
-  - Namespace: isolates resources(hard drive, networking, hostnames, users etc) for a particular process on a machine
-  - Control group: limit, prioritize, and isolate resource usage(CPU, Disk, memory, I/O and network bandwidth) of a group of processes
+- leveraging Linux kernel features
+  - Namespaces and Cgroups
+    - Namespace: isolates resources(hard drive, networking, hostnames, users etc) for a particular process on a machine
+    - Control group: limit, prioritize, and isolate resource usage(CPU, Disk, memory, I/O and network bandwidth) of a group of processes
 - docker command
   - docker pull img:ver(pull image)
   - docker run [-d][-p 6000:6379][-e envVariable=value][--name renameContainer][--net networkName] img(pull images and start a container to run image;-d:detached mode, container runs in background; -p:publish or map a container's port to the specified host port;port binding, 6000 host port, 6379 container application port)
