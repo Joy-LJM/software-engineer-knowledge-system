@@ -16,7 +16,7 @@ function Counter(){
     </div>
   );
 }
-// React.memo did a shallow prop comparison, saw no props at all (so nothing changed), and skipped the render.
+// the reason React.memo bails out is that on re-render, React compares the new props to the old props (shallow equality) before calling the child's function body at all — if they're the same, it reuses the previous Fiber output entirely and skips the render.
 const Child1 = React.memo(function Child1({count}: {count: number}) {
   console.log("Child 1 render");
   return <h2>Hello Child 1, count: {count}</h2>;
