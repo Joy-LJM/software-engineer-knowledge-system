@@ -3,7 +3,8 @@ import heroImg from "./assets/hero.png";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import "./App.css";
-import BasicRerender from "./handson/basicRerender";
+import BasicRerender from "./handson/BasicRerender";
+import { ProductPage } from "./handson/ProductPage";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -53,6 +54,7 @@ function App() {
           Count is {count}
         </button>
         <BasicRerender />
+        <ProductPage/>
       </section>
 
       <div className="ticks"></div>
