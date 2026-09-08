@@ -2,12 +2,18 @@ import React from 'react';
 function Counter(){
   const [count, setCount] = React.useState(0);
   console.log('Counter rendered');
-
+  function handleIncrement() {
+    // setCount((prevCount) => prevCount + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    setCount(count + 1);
+    console.log(count,'count')
+  }
   return (
     <div>
       <h1>Hello</h1>
       <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={handleIncrement}>Increment</button>
       <Child1 count={count}/>
       <Child2 age={1}/>
       <Child3/>
