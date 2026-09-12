@@ -7,7 +7,9 @@ export const ProductPage = () => {
 
   // a lazy initializer (function form of useState), which only runs once on mount.
   const [products] = useState(() => generateProducts(500));
-
+  //  const [items] = useCartStore((state) => state.items);  // this is the hook form — subscribes the calling component to the store, meaning Zustand registers ProductPage to be notified whenever the selected slice changes, so it can re-render the component .
+const items=useCartStore.getState().items //getState():allows you to retrieve the current state of the store without triggering a re-render. Because it doesn't subscribe the component to state changes, it won't cause the component to re-render when the state updates. This is useful for scenarios where you want to access the state once without needing to react to future changes.
+  console.log(items,'items')
   return (
     <div style={{position:'relative'}}>
       <input
@@ -17,8 +19,7 @@ export const ProductPage = () => {
       />
       <CartBadge />
       <div>
-        {/* getState():allows you to retrieve the current state of the store without triggering a re-render. it is useful in scenarios where you need to access the state for computation or logic that does not require updating the UI. */}
-        <button onClick={useCartStore.getState().clearCart}>Clear Cart</button>
+        <button onClick={useCartStore((state)=>state.clearCart)}>Clear Cart</button>
       </div>
       <ProductGrid products={products} />
     </div>
@@ -77,6 +78,7 @@ const CartBadge = () => {
   const count = useCartStore((state) =>
     state.items.reduce((acc, item) => acc + item.quantity, 0),
   );
+
   return (
     <div
       style={{
