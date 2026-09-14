@@ -50,6 +50,9 @@ export const useCartStore = create<CartState>()(
           };
         }),
     }),
-    { name: "cart-storage" }, // localStorage key
+    {
+      name: "cart-storage", // localStorage key
+      partialize: (state) => ({ items: state.items }), // Only persist the parts of the store that we actually want to keep.
+    },
   ),
 );
