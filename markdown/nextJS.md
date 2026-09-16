@@ -30,4 +30,16 @@
     - `cache: 'force-cache'`: explicitly cache the response
     - dynamic: `cache: 'no-store'`
     - time-based ISR: `next: { revalidate: N }`
+      - First request generates and caches the page.
+      - Requests within 30 seconds reuse the cached page.
+      - The first request after 30 seconds regenerates it.
     - caching defaults can vary by Next.js version and route; specify the option when behavior matters
+- Static rendering vs Dynamic rendering
+  - Static rendering:
+    - HTML is generated ahead of time or cached and reused for multiple requests.
+    - Includes build-time static pages and time-based ISR pages.
+    - Good for content that does not need request-specific data.
+  - Dynamic rendering:
+    - HTML is generated on the server for each request.
+    - Use `cache: 'no-store'` when data must be fetched every time.
+    - Request-specific APIs such as cookies or headers can also make a route dynamic.
