@@ -1,0 +1,33 @@
+- SSG(build time) vs SSR(server/request time) vs ISR(server/regenerates after a time interval) vs CSR(browser/runs JavaScript)
+  - describes where and when HTML is rendered
+  - ISR does not regenerate continuously; with `revalidate: 30`, the first request after 30 seconds can trigger regeneration
+- App router vs Pages router
+- Server Components vs Client Components
+  - S: components in the App Router
+    - fetching data
+    - accessing server-side resources
+    - reducing client JavaScript
+    - rendering non-interactive UI
+  - C: "use client";
+    - browser interaction
+    - event handling
+    - state management
+    - hook
+- File-Based Routing
+- In Next.js, only serializable values can cross the Server → Client boundary (no functions, no class instances, no Dates without conversion):
+  - data objects
+  - arrays
+  - strings
+  - numbers
+  - booleans
+- server actions
+  - `use server`
+  - marks an async function as executable on the server
+  - a Client Component can call a Server Action, but the function itself runs on the server
+- Data Fetching & Caching
+  - fetching: `fetch()`
+  - caching:
+    - `cache: 'force-cache'`: explicitly cache the response
+    - dynamic: `cache: 'no-store'`
+    - time-based ISR: `next: { revalidate: N }`
+    - caching defaults can vary by Next.js version and route; specify the option when behavior matters
