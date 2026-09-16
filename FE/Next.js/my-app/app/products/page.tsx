@@ -1,8 +1,9 @@
 import PostDetail from "./postDetail";
 
 export default async function ProductPage() {
+  // Using the next.tags option with fetch for caching external API requests:
   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    next: { revalidate: 30 },
+    next: { revalidate: 30, tags: ["products"] },
   });
   const data = await res.json();
   const generatedAt = new Date().toISOString();

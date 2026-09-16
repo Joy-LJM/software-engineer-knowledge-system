@@ -27,8 +27,8 @@
 - Data Fetching & Caching
   - fetching: `fetch()`
   - caching:
-    - `cache: 'force-cache'`: explicitly cache the response
-    - dynamic: `cache: 'no-store'`
+    - `{cache: 'force-cache'}`: explicitly cache the response
+    - dynamic: `{cache: 'no-store'}`
     - time-based ISR: `next: { revalidate: N }`
       - First request generates and caches the page.
       - Requests within 30 seconds reuse the cached page.
@@ -43,3 +43,29 @@
     - HTML is generated on the server for each request.
     - Use `cache: 'no-store'` when data must be fetched every time.
     - Request-specific APIs such as cookies or headers can also make a route dynamic.
+- Server Actions vs Route Handlers
+  - Server Actions:
+    - async functions marked with `"use server"`
+    - invoked through React-integrated mechanisms such as `<form action={action}>`
+    - useful for mutations from your application UI
+    - still require authentication and server-side validation
+    - `revalidateTag()` and `revalidatePath()` to revalidate stale content
+
+  - Route Handlers:
+    - HTTP endpoints such as `app/api/users/route.ts`
+    - called with `fetch()` or other HTTP clients
+    - useful for public APIs, webhooks, mobile clients, or non-React consumers
+- Cache Invalidation
+  - `updateTag()`
+    - Server Actions only
+    - immediately expires tagged cache data
+    - useful when the user must see their own write immediately
+
+  - `revalidateTag()`
+    - invalidates cached data associated with a tag
+    - supports stale-while-revalidate behavior with a cache profile
+    - usable in Server Actions and Route Handlers
+
+  - `revalidatePath()`
+    - invalidates cached data for a route path
+    - useful when a mutation affects a specific page

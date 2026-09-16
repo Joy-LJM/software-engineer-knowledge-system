@@ -13,7 +13,7 @@ export default function AddProductPage() {
             placeholder="Product name"
             minLength={2}
             maxLength={80}
-            // required
+            required
             className="rounded border border-zinc-300 p-2"
           />
         </label>
