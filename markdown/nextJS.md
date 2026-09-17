@@ -46,10 +46,17 @@
 - Server Actions vs Route Handlers
   - Server Actions:
     - async functions marked with `"use server"`
-    - invoked through React-integrated mechanisms such as `<form action={action}>`
+    - invoked through React-integrated mechanisms such as `<form action={addProduct}>`
     - useful for mutations from your application UI
     - still require authentication and server-side validation
-    - `revalidateTag()` and `revalidatePath()` to revalidate stale content
+    ```
+    "use server";
+
+    export async function addProduct(formData: FormData) {
+      // validate input
+      // mutate data
+    }
+    ```
 
   - Route Handlers:
     - HTTP endpoints such as `app/api/users/route.ts`
@@ -69,3 +76,15 @@
   - `revalidatePath()`
     - invalidates cached data for a route path
     - useful when a mutation affects a specific page
+- `useActionState(serverAction, initialState)`
+  - a Client Component hook, consumes server action's return value and triggers a re-render
+  - returns `[state, formAction]`
+  - changes the Server Action signature by adding `previousState`
+  ```tsx
+  "use client";
+
+  const [state, formAction] = useActionState(addProduct, null);
+
+  <form action={formAction}>
+  ```
+

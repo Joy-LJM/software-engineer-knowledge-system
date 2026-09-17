@@ -7,7 +7,7 @@ test("addProduct rejects invalid input sent without the browser form", async () 
   invalidData.set("name", "");
   invalidData.set("comments", "");
 
-  await assert.rejects(addProduct(invalidData), {
+  await assert.rejects(addProduct(null, invalidData), {
     message: "Product name must be between 2 and 80 characters.",
   });
 });
