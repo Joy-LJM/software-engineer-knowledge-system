@@ -49,6 +49,7 @@
     - invoked through React-integrated mechanisms such as `<form action={addProduct}>`
     - useful for mutations from your application UI
     - still require authentication and server-side validation
+
     ```
     "use server";
 
@@ -62,6 +63,7 @@
     - HTTP endpoints such as `app/api/users/route.ts`
     - called with `fetch()` or other HTTP clients
     - useful for public APIs, webhooks, mobile clients, or non-React consumers
+
 - Cache Invalidation
   - `updateTag()`
     - Server Actions only
@@ -76,15 +78,25 @@
   - `revalidatePath()`
     - invalidates cached data for a route path
     - useful when a mutation affects a specific page
+
 - `useActionState(serverAction, initialState)`
   - a Client Component hook, consumes server action's return value and triggers a re-render
   - returns `[state, formAction]`
   - changes the Server Action signature by adding `previousState`
+
   ```tsx
+  <!-- client component -->
   "use client";
 
   const [state, formAction] = useActionState(addProduct, null);
 
   <form action={formAction}>
-  ```
 
+  <!-- server action file -->
+  "use server";
+
+    export async function addProduct(previousState,formData: FormData) {
+      // validate input
+      // mutate data
+    }
+  ```

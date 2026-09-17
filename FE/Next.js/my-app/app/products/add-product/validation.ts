@@ -6,7 +6,7 @@ type ProductInput = {
 export function validateProductInput(formData: FormData): ProductInput {
   const name = formData.get("name");
   const comments = formData.get("comments");
-
+  // TODO: add authentication and authorization checks here, e.g. only allow logged-in users to add products
   if (
     typeof name !== "string" ||
     name.trim().length < 2 ||

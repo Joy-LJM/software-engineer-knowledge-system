@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import {useActionState} from 'react';
-import { addProduct } from './actions';
+import { useActionState } from "react";
+import { addProduct } from "./actions";
 
 export default function AddProductPage() {
   // client-side React re-render when the server action is called and returns a new state
-  const [state,formAction]=useActionState(addProduct,null);
+  const [state, formAction] = useActionState(addProduct, null);
 
   return (
     <main className="mx-auto max-w-xl p-8">
@@ -38,7 +38,7 @@ export default function AddProductPage() {
           Add product
         </button>
       </form>
-{state?.success && (
+      {state?.success && (
         <p className="mt-4 rounded bg-green-100 p-2 text-green-800">
           Product added successfully!
         </p>
