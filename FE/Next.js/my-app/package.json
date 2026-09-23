@@ -10,6 +10,7 @@
     "test:server-action": "node --test app/products/add-product/actions.test.ts"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^16.3.6",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"

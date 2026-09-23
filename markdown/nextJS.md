@@ -244,3 +244,8 @@
   npm run build
   npm start
   ```
+- Static/prerendered: HTML generated during the build.
+- Dynamic/server-rendered: HTML generated when each request arrives.
+- Client-side interaction: JavaScript runs in the browser after the page loads.
+- Hydration is when React takes the HTML already sent by the server and attaches JavaScript behavior to it in the browser.
+
